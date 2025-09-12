@@ -1,14 +1,12 @@
-# 1. Fetch latest changes
-git fetch origin
+// Simple Hello World server
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-# 2. Merge remote changes into your local main
-git pull origin main
+app.get("/", (req, res) => {
+  res.send("Hello World from Dockerized Node.js app!");
+});
 
-# 3. Stage your new/modified files
-git add app/index.js app/package.json app/package-lock.json
-
-# 4. Commit your changes
-git commit -m "Added index.js and updated package.json with express"
-
-# 5. Push back to GitHub
-git push origin main
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
