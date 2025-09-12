@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./app/Dockerfile    #location pf docker file
+          file: ./app/Dockerfile    #location docker file if it is not in the root
           push: false
           tags: demo-image:latest
           cache-from: type=gha
