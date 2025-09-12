@@ -26,6 +26,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          file: ./app/Dockerfile
           push: false
           tags: demo-image:latest
           cache-from: type=gha
