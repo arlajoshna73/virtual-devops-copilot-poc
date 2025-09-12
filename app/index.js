@@ -1,12 +1,14 @@
-const http = require('http');
+# 1. Fetch latest changes
+git fetch origin
 
-const PORT = process.env.PORT || 3000;
+# 2. Merge remote changes into your local main
+git pull origin main
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello World from Node.js App running in Docker!\n');
-});
+# 3. Stage your new/modified files
+git add app/index.js app/package.json app/package-lock.json
 
-server.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
+# 4. Commit your changes
+git commit -m "Added index.js and updated package.json with express"
+
+# 5. Push back to GitHub
+git push origin main
