@@ -11,8 +11,8 @@ RUN npm install
 # Copy rest of the app code
 COPY app/ .
 
-# Expose port
-EXPOSE 3000
+# Expose port 80 (Azure expects this)
+EXPOSE 80
 
 # Run the app
 CMD ["npm", "start"]
