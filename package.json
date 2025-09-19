@@ -1,0 +1,7 @@
+{
+  "name": "virtual-devops-copilot-poc",
+  "private": true,
+  "scripts": {
+    "test": "cd app && npm test"
+  }
+}
