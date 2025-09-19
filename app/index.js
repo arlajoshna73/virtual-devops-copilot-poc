@@ -1,7 +1,12 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
-const port = process.env.PORT || 3000;  // Azure will inject PORT=80
-app.get("/", (req, res) => res.send("Hello from Dockerized Node app!"));
+app.get('/', (req, res) => {
+  res.send('Hello from Node.js running in Azure Web App!');
+});
 
-app.listen(port, () => console.log(`App running on port ${port}`));
+// Use Azure’s provided PORT (defaults to 80)
+const port = process.env.PORT || 80;
+app.listen(port, () => {
+  console.log(`App running on port ${port}`);
+});
