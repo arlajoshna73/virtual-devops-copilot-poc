@@ -14,6 +14,18 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+         # Install Node.js + npm
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'   # or 20 (LTS)
+
+      - name: Install dependencies
+        run: npm install --prefix app   # install inside app folder
+
+      - name: Run tests
+        run: npm test --prefix app
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
