@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-  workflow_dispatch:  # allows manual trigger
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,6 +13,16 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          cd app
+          npm ci
+
+      - name: Run tests
+        run: |
+          cd app
+          npm test
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -29,8 +39,8 @@ jobs:
       - name: Build and Push image with cache
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./app   # 👈 point to app folder for Docker build
+          file: ./app/Dockerfile
           push: true
           tags: arlajoshna/demo-image:latest
           cache-from: type=gha
