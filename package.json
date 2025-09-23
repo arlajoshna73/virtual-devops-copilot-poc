@@ -2,6 +2,7 @@
   "name": "virtual-devops-copilot-poc",
   "private": true,
   "scripts": {
+    "install": "cd app && npm install",
     "test": "cd app && npm test"
   }
 }
