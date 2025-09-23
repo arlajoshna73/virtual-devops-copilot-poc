@@ -1,10 +1,8 @@
-const request = require("supertest");
-const app = require("../index");
+const request = require('supertest');
+const app = require('../index'); // Import the Express app
 
-describe("GET /", () => {
-  it("should return Hello message", async () => {
-    const res = await request(app).get("/");
-    expect(res.statusCode).toBe(200);
-    expect(res.text).toContain("Hello");
-  });
+test('GET / returns 200 and expected message', async () => {
+  const response = await request(app).get('/');
+  expect(response.status).toBe(200);
+  expect(response.text).toContain('Hello from Node.js running in Azure Web App!');
 });
