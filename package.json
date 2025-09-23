@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "install": "cd app && npm install",
-    "test": "cd app && npm test"
+    "verify-install": "ls -la app/node_modules/.bin",
+    "test": "cd app && npm test",
+    "start": "cd app && node index.js"
   }
 }
