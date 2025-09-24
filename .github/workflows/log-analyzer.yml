@@ -1,8 +1,7 @@
 name: Log Analyzer
-
 on:
   workflow_run:
-    workflows: ["Build and Push Docker Image"]
+    workflows: ["Build (with Docker layer cache)"]
     types: [completed]
 
 jobs:
@@ -11,10 +10,11 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch logs (stub)
-        run: echo "Fetching logs from failed workflow..."
+      - name: Download logs or artifacts
+        run: echo "Fetch logs here or use artifacts"
       - name: Run log analyzer
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 scripts/log_analyzer.py --run-id ${{ github.event.workflow_run.id }}
