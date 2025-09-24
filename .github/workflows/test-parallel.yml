@@ -1,5 +1,4 @@
 name: Test (parallel)
-
 on: [push, pull_request]
 
 jobs:
@@ -13,20 +12,20 @@ jobs:
         id: set_files
         run: |
           files=$(npx jest --listTests)
-          echo "files=$files" >> $GITHUB_OUTPUT
+          echo "::set-output name=files::$files"
 
   test:
     needs: list-tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        shard: [1,2,3,4]
+        shard: [1, 2, 3, 4]  # Simulated shards
     steps:
       - uses: actions/checkout@v4
-      - name: Install deps
+      - name: Install dependencies
         run: npm ci
       - name: Run tests shard
         run: |
+          # Simulate shard logic (replace with real logic later)
           echo "Running shard ${{ matrix.shard }}"
-          # for demo, just filter tests using modulo shard index
           npx jest --runInBand --testNamePattern="Shard-${{ matrix.shard }}"
