@@ -4,11 +4,11 @@
   "description": "Virtual DevOps Co-Pilot demo app",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest --verbose"
   },
   "keywords": [],
-  "author": "",
+  "author": "Arla Joshna",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
