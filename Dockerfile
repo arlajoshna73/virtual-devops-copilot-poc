@@ -1,18 +1,14 @@
 # Use official Node.js runtime
 FROM node:18
 
-# Set working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and install dependencies
-COPY app/package*.json ./
+# Copy root-level package.json and install dependencies
+COPY package*.json ./
 RUN npm install
 
-# Copy rest of the app code
-COPY app/ .
+# Copy the rest of the app code
+COPY . .
 
-# Expose port 80 (Azure expects this)
 EXPOSE 80
-
-# Run the app
 CMD ["npm", "start"]
