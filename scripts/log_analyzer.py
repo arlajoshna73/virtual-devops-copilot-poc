@@ -1,16 +1,24 @@
 import os
-import sys
+import openai
 
-def fake_llm_summary(logs: str) -> str:
-    # Stub: Replace with OpenAI API call later
-    return f"🔎 Analyzed logs: Found error -> {logs[:80]}... Suggestion: check package.json scripts."
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def get_logs(run_id):
+    # Placeholder: Replace with actual GitHub API call to fetch logs
+    return "Sample error: npm run build failed due to missing script."
+
+def analyze_logs(logs):
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are a DevOps assistant."},
+            {"role": "user", "content": f"Analyze this CI/CD log and suggest a fix:\n{logs}"}
+        ]
+    )
+    return response['choices'][0]['message']['content']
 
 if __name__ == "__main__":
-    run_id = sys.argv[2] if len(sys.argv) > 2 else "N/A"
-    print(f"Analyzing logs for run {run_id}...")
-
-    # For demo, just fake logs
-    sample_logs = "Error: npm ERR! missing script: build"
-    result = fake_llm_summary(sample_logs)
-
-    print(result)
+    run_id = os.getenv("RUN_ID", "12345")
+    logs = get_logs(run_id)
+    suggestion = analyze_logs(logs)
+    print("🔍 Suggested Fix:\n", suggestion)
