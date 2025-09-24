@@ -2,30 +2,11 @@ name: Test (parallel)
 on: [push, pull_request]
 
 jobs:
-  list-tests:
-    runs-on: ubuntu-latest
-    outputs:
-      files: ${{ steps.set_files.outputs.files }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: List test files
-        id: set_files
-        run: |
-          files=$(npx jest --listTests)
-          echo "::set-output name=files::$files"
-
   test:
-    needs: list-tests
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        shard: [1, 2, 3, 4]  # Simulated shards
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci
-      - name: Run tests shard
-        run: |
-          # Simulate shard logic (replace with real logic later)
-          echo "Running shard ${{ matrix.shard }}"
-          npx jest --maxWorkers=4
+      - name: Run tests
+        run: npx jest --maxWorkers=4
