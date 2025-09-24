@@ -28,4 +28,4 @@ jobs:
         run: |
           # Simulate shard logic (replace with real logic later)
           echo "Running shard ${{ matrix.shard }}"
-          npx jest --runInBand --testNamePattern="Shard-${{ matrix.shard }}"
+          npx jest --maxWorkers=4
