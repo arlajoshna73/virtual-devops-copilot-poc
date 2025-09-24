@@ -1,10 +1,10 @@
-{
-  "name": "virtual-devops-copilot-poc",
-  "private": true,
-  "scripts": {
-    "install": "cd app && npm install",
-    "verify-install": "ls -la app/node_modules/.bin",
-    "test": "cd app && npm test",
-    "start": "cd app && node index.js"
-  }
-}
+
+FROM node:18
+
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+EXPOSE 80
+CMD ["npm", "start"]
